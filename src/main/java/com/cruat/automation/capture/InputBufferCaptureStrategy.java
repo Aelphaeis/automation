@@ -54,7 +54,7 @@ public class InputBufferCaptureStrategy implements CaptureStrategy {
 		bmi.bmiHeader.biBitCount = 32;
 		bmi.bmiHeader.biCompression = WinGDI.BI_RGB;
 
-		Memory buffer = new Memory(w * h * 4);
+		Memory buffer = new Memory(w * h * 4L);
 
 		gdi.GetDIBits(win, bMap, 0, h, buffer, bmi, WinGDI.DIB_RGB_COLORS);
 		BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
