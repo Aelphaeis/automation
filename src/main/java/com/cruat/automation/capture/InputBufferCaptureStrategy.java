@@ -13,6 +13,7 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef.HBITMAP;
 import com.sun.jna.platform.win32.WinDef.HDC;
 import com.sun.jna.platform.win32.WinDef.HWND;
+import com.sun.jna.platform.win32.WinDef.RECT;
 import com.sun.jna.platform.win32.WinGDI;
 import com.sun.jna.platform.win32.WinGDI.BITMAPINFO;
 import com.sun.jna.platform.win32.WinNT.HANDLE;
@@ -66,5 +67,19 @@ public class InputBufferCaptureStrategy implements CaptureStrategy {
 		User32.INSTANCE.ReleaseDC(handle, win);
 
 		return img;
+	}
+
+	public Rectangle getRegion() {
+		RECT winRect = new RECT();
+		User32.INSTANCE.GetWindowRect(handle, winRect);
+		Rectangle region = new Rectangle();
+
+		// Normalize this for when the game is not on main monitor
+		region.height = winRect.bottom - winRect.top;
+		region.width = winRect.right - winRect.left;
+		region.x = 0;
+		region.y = 0;
+
+		return region;
 	}
 }
