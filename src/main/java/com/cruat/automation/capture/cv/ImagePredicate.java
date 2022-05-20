@@ -1,4 +1,4 @@
-package com.cruat.automation.capture.predicates;
+package com.cruat.automation.capture.cv;
 
 import java.awt.image.BufferedImage;
 import java.util.function.Predicate;
