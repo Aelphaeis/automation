@@ -10,7 +10,7 @@ public class Win32ForegroundStrategy implements FocusStrategy {
 	private final HWND handle;
 
 	public Win32ForegroundStrategy(String processName) {
-		this(User32.INSTANCE.FindWindow(null, processName));
+		this(new ProcessNameResolver(processName).getHandle());
 	}
 
 	public Win32ForegroundStrategy(HWND handle) {
