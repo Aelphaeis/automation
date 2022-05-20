@@ -7,6 +7,9 @@ import java.util.function.Supplier;
 import com.cruat.automation.AutomationException;
 
 public class TimedPredicateIterator<T> implements PredicateIterator<T> {
+	
+	public static int DEFAULT_TIMEOUT = 5000;
+	public static int DEFAULT_INTERVAL = 500;
 
 	private final Predicate<T> predicate;
 	private final int interval;
@@ -57,6 +60,11 @@ public class TimedPredicateIterator<T> implements PredicateIterator<T> {
 		private Predicate<T> predicate;
 		private int timeout;
 		private int interval;
+		
+		public Builder() {
+			this.timeout = DEFAULT_TIMEOUT;
+			this.interval = DEFAULT_INTERVAL;
+		}
 
 		public Predicate<T> getPredicate() {
 			return predicate;
