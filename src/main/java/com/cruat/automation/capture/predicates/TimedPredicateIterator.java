@@ -88,7 +88,7 @@ public class TimedPredicateIterator<T> implements PredicateIterator<T> {
 			return interval;
 		}
 
-		public Builder<T> setDelay(int interval) {
+		public Builder<T> setInterval(int interval) {
 			this.interval = interval;
 			return this;
 		}
