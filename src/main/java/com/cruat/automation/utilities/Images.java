@@ -17,7 +17,7 @@ import javax.swing.WindowConstants;
 import com.cruat.automation.AutomationException;
 
 public class Images {
-	
+
 	static final String PNG = "png";
 
 	public static void show(BufferedImage image) {
@@ -35,11 +35,19 @@ public class Images {
 		WritableRaster wr = img.getRaster().createCompatibleWritableRaster();
 		return new BufferedImage(cm, img.copyData(wr), isAlphaPremulti, null);
 	}
-	
 
 	public static void toFile(RenderedImage image, File output) {
 		try {
 			ImageIO.write(image, Images.PNG, output);
+		}
+		catch (IOException e) {
+			throw new AutomationException(e);
+		}
+	}
+
+	public static BufferedImage toBufferedImage(File file) {
+		try {
+			return ImageIO.read(file);
 		}
 		catch (IOException e) {
 			throw new AutomationException(e);
