@@ -45,6 +45,7 @@ public class RobotMouseInputStrategy implements MouseInputStrategy {
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 	}
 
+	@Override
 	public void hover(int x, int y) {
 		robot.mouseMove(x, y);
 	}

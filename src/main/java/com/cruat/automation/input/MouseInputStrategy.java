@@ -3,6 +3,8 @@ package com.cruat.automation.input;
 
 public interface MouseInputStrategy {
 	
-	public void click(int x, int y);
+	void click(int x, int y);
+
+	void hover(int x, int y);
 
 }
