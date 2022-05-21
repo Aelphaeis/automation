@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.cruat.automation.process.ProcessNameResolver;
 import com.sun.jna.Memory;
 import com.sun.jna.platform.win32.GDI32;
 import com.sun.jna.platform.win32.User32;
@@ -22,6 +23,10 @@ public class InputBufferCaptureStrategy implements CaptureStrategy {
 
 	private static final Logger logger = LogManager.getLogger();
 	private final HWND handle;
+
+	public InputBufferCaptureStrategy(String processName) {
+		this(new ProcessNameResolver(processName).getHandle());
+	}
 
 	public InputBufferCaptureStrategy(HWND handle) {
 		this.handle = Objects.requireNonNull(handle);
