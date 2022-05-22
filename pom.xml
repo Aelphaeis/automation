@@ -5,6 +5,7 @@
 	<groupId>com.cruat</groupId>
 	<artifactId>automation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>ISO8859_1</project.build.sourceEncoding>
