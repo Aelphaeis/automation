@@ -11,8 +11,8 @@ public class Diagnostics {
 	private static final DateTimeFormatter DTF = defaultDateTimeFormatter();
 	private static final String PREFIX = "file://";
 
-	public static String logImage(RenderedImage image) {
-		return logImage(image, LocalDateTime.now());
+	public static String logImage(RenderedImage ri) {
+		return logImage(ri, LocalDateTime.now());
 	}
 
 	public static String logImage(RenderedImage ri, LocalDateTime ldt) {
