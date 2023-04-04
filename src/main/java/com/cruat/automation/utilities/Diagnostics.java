@@ -7,16 +7,23 @@ import java.time.format.DateTimeFormatter;
 
 public class Diagnostics {
 
-	private static final String DT_FORMAT = "uuuu-MM-dd'T'HH-mm-ss-SSS";
-	private static final DateTimeFormatter DTF = DateTimeFormatter
-			.ofPattern(DT_FORMAT);
+	public static final String DATETIME_FORMAT = "uuuu-MM-dd'T'HH-mm-ss-SSS";
+	private static final DateTimeFormatter DTF = defaultDateTimeFormatter();
+	private static final String PREFIX = "file://";
 
 	public static String logImage(RenderedImage image) {
+		return logImage(image, LocalDateTime.now());
+	}
+
+	public static String logImage(RenderedImage ri, LocalDateTime ldt) {
 		File file = new File("src/main/resources/logs/");
-		String name = DTF.format(LocalDateTime.now());
-		File imgFile = new File(file, name + ".png");
-		Images.toFile(image, imgFile);
-		return imgFile.getAbsolutePath();
+		File imgFile = new File(file, DTF.format(ldt) + ".png");
+		Images.toFile(ri, imgFile);
+		return PREFIX + imgFile.getAbsolutePath();
+	}
+
+	private static DateTimeFormatter defaultDateTimeFormatter() {
+		return DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 	}
 
 	private Diagnostics() {
