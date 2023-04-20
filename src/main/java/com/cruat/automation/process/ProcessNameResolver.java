@@ -13,6 +13,7 @@ public class ProcessNameResolver implements ProcessResolutionStrategy {
 		this.processName = Objects.requireNonNull(name);
 	}
 
+	@Override
 	public HWND getHandle() {
 		return User32.INSTANCE.FindWindow(null, this.processName);
 	}
