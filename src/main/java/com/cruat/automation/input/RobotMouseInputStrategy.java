@@ -20,18 +20,20 @@ import com.sun.jna.platform.win32.WinDef.RECT;
 public class RobotMouseInputStrategy implements MouseInputStrategy {
 
 	private static final Logger logger = LogManager.getLogger();
-	private final String processName;
+	private final HWND handle;
 	private final Robot robot;
 
 	public RobotMouseInputStrategy(String processName) {
-		this.processName = Objects.requireNonNull(processName);
+		this(new ProcessNameResolver(processName).getHandle());
+	}
+
+	public RobotMouseInputStrategy(HWND hWnd) {
+		this.handle = Objects.requireNonNull(hWnd);
 		this.robot = createRobot();
 	}
 
 	@Override
 	public void click(int x, int y) {
-		HWND handle = new ProcessNameResolver(processName).getHandle();
-
 		RECT winRect = new RECT();
 		User32.INSTANCE.GetWindowRect(handle, winRect);
 		Rectangle region = winRect.toRectangle();
