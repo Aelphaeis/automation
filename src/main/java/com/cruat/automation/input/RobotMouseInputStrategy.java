@@ -33,7 +33,7 @@ public class RobotMouseInputStrategy implements MouseInputStrategy {
 	}
 
 	@Override
-	public void click(int x, int y) {
+	public void click(int x, int y, int delay) {
 		RECT winRect = new RECT();
 		User32.INSTANCE.GetWindowRect(handle, winRect);
 		Rectangle region = winRect.toRectangle();
@@ -43,7 +43,7 @@ public class RobotMouseInputStrategy implements MouseInputStrategy {
 		new Win32ForegroundStrategy(handle).execute();
 		hover(region.x + x, region.y + y);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-		Threads.pause(20);
+		Threads.pause(delay);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 	}
 
