@@ -1,6 +1,9 @@
 package com.cruat.automation.utilities;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.RenderedImage;
@@ -64,6 +67,21 @@ public class Images {
 		boolean isAlphaPremulti = cm.isAlphaPremultiplied();
 		WritableRaster wr = img.getRaster().createCompatibleWritableRaster();
 		return new BufferedImage(cm, img.copyData(wr), isAlphaPremulti, null);
+	}
+	
+	public static BufferedImage sub(BufferedImage image, Rectangle r) {
+		return image.getSubimage(r.x, r.y, r.width, r.height);
+	}
+
+	public static BufferedImage circle(BufferedImage src, int x, int y) {
+		BufferedImage dest = Images.copy(src);
+
+		Graphics2D gfx = (Graphics2D) dest.getGraphics();
+		gfx.setColor(Color.WHITE);
+		gfx.drawOval(x, y, 10, 10);
+		gfx.dispose();
+
+		return dest;
 	}
 
 	public static void toFile(RenderedImage image, File output) {
