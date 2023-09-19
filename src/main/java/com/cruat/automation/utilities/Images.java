@@ -72,6 +72,20 @@ public class Images {
 	public static BufferedImage sub(BufferedImage image, Rectangle r) {
 		return image.getSubimage(r.x, r.y, r.width, r.height);
 	}
+	
+	public static BufferedImage bullseye(BufferedImage src, int x, int y) {
+		BufferedImage dest = Images.copy(src);
+
+		Graphics2D gfx = (Graphics2D) dest.getGraphics();
+		gfx.setColor(Color.WHITE);
+		
+		gfx.drawOval(x - 5, y - 5, 10, 10);
+		gfx.drawRect(x, y, 0, 0);
+
+		gfx.dispose();
+
+		return dest;
+	}
 
 	public static BufferedImage circle(BufferedImage src, int x, int y) {
 		BufferedImage dest = Images.copy(src);
