@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 import com.cruat.automation.AutomationException;
+import com.sun.jna.platform.win32.WinDef.POINT;
 
 public class Images {
 
@@ -68,17 +69,21 @@ public class Images {
 		WritableRaster wr = img.getRaster().createCompatibleWritableRaster();
 		return new BufferedImage(cm, img.copyData(wr), isAlphaPremulti, null);
 	}
-	
+
 	public static BufferedImage sub(BufferedImage image, Rectangle r) {
 		return image.getSubimage(r.x, r.y, r.width, r.height);
 	}
-	
+
+	public static BufferedImage bulleyes(BufferedImage src, POINT p) {
+		return bullseye(src, p.x, p.y);
+	}
+
 	public static BufferedImage bullseye(BufferedImage src, int x, int y) {
 		BufferedImage dest = Images.copy(src);
 
 		Graphics2D gfx = (Graphics2D) dest.getGraphics();
 		gfx.setColor(Color.WHITE);
-		
+
 		gfx.drawOval(x - 5, y - 5, 10, 10);
 		gfx.drawRect(x, y, 0, 0);
 
