@@ -3,6 +3,7 @@ package com.cruat.automation.utilities;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -18,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 import com.cruat.automation.AutomationException;
-import com.sun.jna.platform.win32.WinDef.POINT;
 
 public class Images {
 
@@ -74,7 +74,7 @@ public class Images {
 		return image.getSubimage(r.x, r.y, r.width, r.height);
 	}
 
-	public static BufferedImage bulleyes(BufferedImage src, POINT p) {
+	public static BufferedImage bullseye(BufferedImage src, Point p) {
 		return bullseye(src, p.x, p.y);
 	}
 
