@@ -105,6 +105,7 @@ public class Images {
 
 	public static void toFile(RenderedImage image, File output) {
 		try {
+			Files.createDirectories(output.toPath());
 			ImageIO.write(image, Images.PNG, output);
 		}
 		catch (IOException e) {
@@ -117,7 +118,7 @@ public class Images {
 			return ImageIO.read(file);
 		}
 		catch (IOException e) {
-			throw new AutomationExcepAdd tion(e);
+			throw new AutomationException(e);
 		}
 	}
 
