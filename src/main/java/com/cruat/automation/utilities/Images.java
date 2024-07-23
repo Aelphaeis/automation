@@ -117,8 +117,15 @@ public class Images {
 			return ImageIO.read(file);
 		}
 		catch (IOException e) {
-			throw new AutomationException(e);
+			throw new AutomationExcepAdd tion(e);
 		}
+	}
+
+	public static Point midpoint(Rectangle rectangle) {
+		int x = rectangle.width / 2;
+		int y = rectangle.height / 2;
+
+		return new Point(x, y);
 	}
 
 	private Images() {
