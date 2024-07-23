@@ -7,10 +7,12 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
+import java.awt.image.RasterFormatException;
 import java.awt.image.RenderedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -70,8 +72,19 @@ public class Images {
 		return new BufferedImage(cm, img.copyData(wr), isAlphaPremulti, null);
 	}
 
-	public static BufferedImage sub(BufferedImage image, Rectangle r) {
-		return image.getSubimage(r.x, r.y, r.width, r.height);
+	public static BufferedImage sub(BufferedImage img, Rectangle r) {
+		try {
+			return img.getSubimage(r.x, r.y, r.width, r.height);
+		}
+		catch (RasterFormatException e) {
+			String err = new StringBuilder()
+					.append("Unable to get sub image of ")
+					.append(r)
+					.append(" from: ")
+					.append(new Rectangle(img.getWidth(), img.getHeight()))
+					.toString();
+			throw new AutomationException(err, e);
+		}
 	}
 
 	public static BufferedImage bullseye(BufferedImage src, Point p) {
@@ -91,6 +104,7 @@ public class Images {
 
 		return dest;
 	}
+	
 
 	public static BufferedImage circle(BufferedImage src, int x, int y) {
 		BufferedImage dest = Images.copy(src);
