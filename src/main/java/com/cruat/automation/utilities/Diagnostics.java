@@ -9,6 +9,7 @@ public class Diagnostics {
 
 	public static final String DATETIME_FORMAT = "uuuu-MM-dd'T'HH-mm-ss-SSS";
 	private static final DateTimeFormatter DTF = defaultDateTimeFormatter();
+	private static final String BASE_DIR = "logs/";
 	private static final String PREFIX = "file://";
 
 	public static String logImage(RenderedImage ri) {
@@ -16,8 +17,7 @@ public class Diagnostics {
 	}
 
 	public static String logImage(RenderedImage ri, LocalDateTime ldt) {
-		File file = new File("src/main/resources/logs/");
-		File imgFile = new File(file, DTF.format(ldt) + ".png");
+		File imgFile = new File(new File(BASE_DIR), DTF.format(ldt) + ".png");
 		Images.toFile(ri, imgFile);
 		return PREFIX + imgFile.getAbsolutePath();
 	}
