@@ -104,7 +104,6 @@ public class Images {
 
 		return dest;
 	}
-	
 
 	public static BufferedImage circle(BufferedImage src, int x, int y) {
 		BufferedImage dest = Images.copy(src);
@@ -117,10 +116,11 @@ public class Images {
 		return dest;
 	}
 
-	public static void toFile(RenderedImage image, File output) {
+	public static File toFile(RenderedImage image, File output) {
 		try {
 			Files.createDirectories(output.toPath());
 			ImageIO.write(image, Images.PNG, output);
+			return output;
 		}
 		catch (IOException e) {
 			throw new AutomationException(e);
